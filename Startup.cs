@@ -25,7 +25,7 @@ namespace CoreIdentityProject
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<ApplicationIdentityDbContext>(options =>
+            services.AddDbContext<ApplicationIdentityDbContext>(options =>         
             {
                 options.UseSqlServer(configuration["ConnectionStrings:DefaultConnectionStrings"]);
             });
