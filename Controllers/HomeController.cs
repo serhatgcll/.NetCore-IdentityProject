@@ -46,7 +46,7 @@ namespace CoreIdentityProject.Controllers
             {
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = userViewModel.UserName;
-                user.Email = userViewModel.Email;
+                user.Email = userViewModel.Email;                       
                 user.PhoneNumber = userViewModel.PhoneNumber;
 
                 IdentityResult result = await _userManager.CreateAsync(user, userViewModel.Password);
