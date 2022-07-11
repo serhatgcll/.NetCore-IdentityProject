@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting.Internal;
 
 namespace CoreIdentityProject.Models
 {
-    public class ApplicationIdentityDbContext:IdentityDbContext<ApplicationUser>
+    public class ApplicationIdentityDbContext:IdentityDbContext<ApplicationUser,ApplicationRole,string>
 
     {
 

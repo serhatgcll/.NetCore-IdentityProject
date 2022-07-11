@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
 namespace CoreIdentityProject.Models
-{ 
-    public class ApplicationUser :IdentityUser
+{
+    public class ApplicationRole:IdentityRole
     {
         
     }

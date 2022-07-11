@@ -6,11 +6,45 @@
     <title>@ViewBag.Title</title>
     <script src="~/lib/jquery/jquery.js"></script>
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/login/js/bootstrap.min.js"></script>
+    <link href="~/login/css/bootstrap.min.css" rel="stylesheet" />
+  
+    @await Component.InvokeAsync("NToastNotify")
 </head>
 
 <body>
-    <div>
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-md">
+
+            <a class="navbar-brand" href="#">IdentityCore</a>
+         
+            <div class="collapse navbar-collapse" id="navbarNav">
+               
+                        <a class="nav-link" asp-action="Home">Anasayfa</a>
+                   
+                   
+                        <a class="nav-link" asp-action="SignUp" >Üye Ol</a>
+
+                
+                        <a class="nav-link" asp-action="Login">Giriş Yap</a>
+               
+            </div>
+
+        </div>
+
+    </nav>    
+
+<div class="container">
+
+</div>
+
+        
+
+
+<div>
         @RenderBody()
     </div>
 </body>
 </html>
+/>

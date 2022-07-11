@@ -11,6 +11,7 @@ using CoreIdentityProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NToastNotify;
 
 namespace CoreIdentityProject
 {
@@ -30,13 +31,22 @@ namespace CoreIdentityProject
                 options.UseSqlServer(configuration["ConnectionStrings:DefaultConnectionStrings"]);
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+              ProgressBar = false,
+              PositionClass =ToastPositions.TopRight ,
+              PreventDuplicates = true,
+              CloseButton = true
+            });
+
 
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
-            
+
+
 
         }
 
@@ -49,6 +59,7 @@ namespace CoreIdentityProject
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+            app.UseNToastNotify();
         }
     }
 }
