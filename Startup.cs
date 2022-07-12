@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreIdentityProject.CustomValidation;
 using CoreIdentityProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,6 @@ namespace CoreIdentityProject
         {
             this.configuration = configuration;
         }
-          
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -31,7 +31,22 @@ namespace CoreIdentityProject
                 options.UseSqlServer(configuration["ConnectionStrings:DefaultConnectionStrings"]);
             });
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>(opts =>
+                {
+                    opts.User.RequireUniqueEmail = true;
+                    opts.User.AllowedUserNameCharacters =
+                        "abcçdefghýijklmnoöpqrsþtuüvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
+
+
+
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequiredLength = 4;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireDigit = false;
+                }).AddPasswordValidator<CustomPasswordValidator>()
+                .AddUserValidator<CustomUserValidator>()
+                .AddErrorDescriber<CustomIdentityErrorDescriber>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
             services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
             {
@@ -40,14 +55,9 @@ namespace CoreIdentityProject
               PreventDuplicates = true,
               CloseButton = true
             });
-
-
-
+                 
             services.AddMvc(options => options.EnableEndpointRouting = false);
-
-
-
-
+             
         }
 
         
