@@ -25,11 +25,28 @@ namespace CoreIdentityProject
         }
         public void ConfigureServices(IServiceCollection services)
         {
+              
 
             services.AddDbContext<ApplicationIdentityDbContext>(options =>         
             {
                 options.UseSqlServer(configuration["ConnectionStrings:DefaultConnectionStrings"]);
             });
+
+            CookieBuilder cookieBuilder = new CookieBuilder();
+            cookieBuilder.Name = "MyBlog";
+            cookieBuilder.Expiration=TimeSpan.FromDays(30);
+            cookieBuilder.HttpOnly = true;
+            cookieBuilder.SameSite = SameSiteMode.Strict;
+            cookieBuilder.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie = cookieBuilder;
+                opt.LoginPath = new PathString("Home/Login");
+                opt.SlidingExpiration = true;
+            });
+
+
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(opts =>
                 {
