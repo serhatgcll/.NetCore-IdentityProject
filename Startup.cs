@@ -35,9 +35,7 @@ namespace CoreIdentityProject
                 {
                     opts.User.RequireUniqueEmail = true;
                     opts.User.AllowedUserNameCharacters =
-                        "abcçdefghýijklmnoöpqrsþtuüvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
-
-
+                        "abcçdefghýijklmnoöpqrsþtuüvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";    
 
                     opts.Password.RequireNonAlphanumeric = false;
                     opts.Password.RequiredLength = 4;
@@ -59,10 +57,7 @@ namespace CoreIdentityProject
             services.AddMvc(options => options.EnableEndpointRouting = false);
              
         }
-
-        
-
-       
+              
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();

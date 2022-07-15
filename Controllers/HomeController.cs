@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using CoreIdentityProject.Models;
 using CoreIdentityProject.ViewModels;
@@ -19,7 +20,7 @@ namespace CoreIdentityProject.Controllers
 
         public HomeController(UserManager<ApplicationUser> userManager,IToastNotification toastNotification)
         {
-            _userManager = userManager;
+            _userManager = userManager;                         
             _toastNotification = toastNotification;
         }
 
@@ -39,6 +40,8 @@ namespace CoreIdentityProject.Controllers
         {
             return View();
         }
+
+        //todo: Login sayfasına yönlendirme işleminde ki bug çözülecek.
         [HttpPost]
         public async Task<IActionResult> SignUp(UserViewModel userViewModel)
         {
@@ -52,10 +55,11 @@ namespace CoreIdentityProject.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, userViewModel.Password);
 
                 if (result.Succeeded)
-                {
+                {   
                     _toastNotification.AddSuccessToastMessage("Kullanıcı kayıt işlemi başarılı");
 
-                   // return RedirectToAction("Login");
+                    
+                    //return RedirectToAction("Login");
 
                 }
                 

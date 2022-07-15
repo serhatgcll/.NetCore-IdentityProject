@@ -38,11 +38,7 @@ namespace CoreIdentityProject.CustomValidation
             {
                 return Task.FromResult(IdentityResult.Failed(errors.ToArray()));
             }
-
-
-
-
-
+     
         }
     }
 }
